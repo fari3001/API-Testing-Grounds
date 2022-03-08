@@ -1,23 +1,40 @@
 import logo from './logo.svg';
 import './App.css';
+import { getAirportImage } from './api'
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // getAirportImage().then((data) => {
+    // console.log(data)
+    getAirportImage().then((data) => {
+      setData(data)
+
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log(data.length)
+    if (data.length !== 0) {
+      setIsLoading(false)
+    }
+  }, [isLoading])
+  console.log(data)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        data?.map((el) => (
+          <div className='card-wrapper'>
+              
+          </div>
+      ))
+      )}
     </div>
   );
 }
