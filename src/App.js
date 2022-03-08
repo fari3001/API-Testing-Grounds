@@ -21,7 +21,7 @@ function App() {
     if (data.length !== 0) {
       setIsLoading(false)
     }
-  }, [isLoading])
+  }, [isLoading, data])
   console.log(data)
 
   return (
@@ -30,8 +30,9 @@ function App() {
         <h1>Loading...</h1>
       ) : (
         data?.map((el) => (
-          <div className='card-wrapper'>
-              
+          <div className='card-wrapper'>   
+              <img src={el.url_max} />
+              <h3>{el.tags.slice(1).map((name) => name.tag)}</h3>
           </div>
       ))
       )}
